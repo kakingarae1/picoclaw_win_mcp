@@ -1,0 +1,8 @@
+*.exe
+*.exe~
+*.dll
+*.test
+*.out
+vendor/
+picoclaw.exe
+picoclaw-dev.exe
