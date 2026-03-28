@@ -14,6 +14,7 @@ type Config struct {
 	MCP       MCPConfig      `yaml:"mcp"`
 	Gateway   GatewayConfig  `yaml:"gateway"`
 	Security  SecurityConfig `yaml:"security"`
+	Teams     TeamsConfig    `yaml:"teams"`
 }
 
 type AgentConfig struct {
@@ -61,6 +62,12 @@ type SecurityConfig struct {
 	SingleInstance       bool     `yaml:"single_instance"`
 }
 
+type TeamsConfig struct {
+	Enabled      bool     `yaml:"enabled"`
+	AppID        string   `yaml:"app_id"`
+	AllowedUsers []string `yaml:"allowed_users"`
+}
+
 func Defaults() *Config {
 	ws := filepath.Join(os.Getenv("APPDATA"), "picoclaw", "workspace")
 	return &Config{
@@ -73,6 +80,7 @@ func Defaults() *Config {
 		},
 		MCP:     MCPConfig{Enabled: true, Servers: []MCPServer{}},
 		Gateway: GatewayConfig{Host: "127.0.0.1", Port: 18790, WebUI: true, WebUIPort: 18800},
+		Teams:   TeamsConfig{Enabled: false},
 		Security: SecurityConfig{
 			RestrictWorkspace: true, AllowedCommands: []string{"powershell", "cmd", "python", "git", "node"},
 			CronRequiresApproval: true, MCPLocalhostOnly: true, SingleInstance: true,
